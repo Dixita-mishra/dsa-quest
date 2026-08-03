@@ -1,27 +1,32 @@
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout.jsx";
-import Landing from "../pages/Landing.jsx";
-import Login from "../pages/Login.jsx";
-import Signup from "../pages/Signup.jsx";
-import Dashboard from "../pages/Dashboard.jsx";
-import Profile from "../pages/Profile.jsx";
-import Roadmap from "../pages/Roadmap.jsx";
-import NotFound from "../pages/NotFound.jsx";
+import PublicLayout from "../layouts/PublicLayout.jsx";
+import DashboardLayout from "../layouts/DashboardLayout.jsx";
 
-// All app routes are declared here. Pages render inside MainLayout,
-// which keeps the Navbar consistent across every route.
+import Landing from "../pages/public/Landing.jsx";
+import Login from "../pages/public/Login.jsx";
+import Signup from "../pages/public/Signup.jsx";
+import NotFound from "../pages/public/NotFound.jsx";
+
+import Dashboard from "../pages/dashboard/Dashboard.jsx";
+import Profile from "../pages/dashboard/Profile.jsx";
+import Roadmap from "../pages/dashboard/Roadmap.jsx";
+
 function AppRoutes() {
   return (
     <Routes>
-      <Route element={<MainLayout />}>
+      <Route element={<PublicLayout />}>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="*" element={<NotFound />} />
       </Route>
+
+      <Route element={<DashboardLayout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/roadmap" element={<Roadmap />} />
+        <Route path="/dashboard/profile" element={<Profile />} />
+      </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
